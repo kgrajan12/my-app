@@ -1,14 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, LogBox } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Home from './src/screens/Home';
+import { defaultScreenOptions, ignoreLogs, screens } from './src/utilities/constants';
+import ViewImage from './src/screens/ViewImage';
+
+LogBox.ignoreLogs(ignoreLogs);
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={defaultScreenOptions}>
+        <Stack.Screen name={screens.home} component={Home} />
+        <Stack.Screen name={screens.viewImage} component={ViewImage} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
